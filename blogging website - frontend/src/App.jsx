@@ -1,6 +1,7 @@
 import Navbar from "./components/navbar.component";
 import {Routes, Route} from "react-router-dom";
 import UserAuthForm from "./pages/userAuthForm.page";
+import Editor from "./pages/editor.pages";
 
 
 export const UserContext = createCoontext ({})
@@ -22,6 +23,7 @@ const App = () => {
 
         
         <UserContext.Provider value={{UserAuth, setUserAuth }}>
+            <Route path = "/editor" element= {<Editor />} />
             <Routes>
             <Route path="/" element={<Navbar />}>
                 <Route path ="signin" element={<UserAuthForm type="sign-in" />} />

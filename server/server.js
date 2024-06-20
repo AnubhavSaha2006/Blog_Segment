@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import { nanoid } from 'nanoid';
 import jwt from 'jsonwebtoken';
 import cors from "cors";
+import aws from "aws-sdk";
+
 
 
 //schema below
@@ -25,6 +27,34 @@ server.use(cors());
 mongoose.connect(process.env.DB_LOCATION , {
     autoIndex: true
     })
+
+
+//setting up S3 bucket
+
+//NOTE: I have not connected the server to the AWS because i would have to make an account (which would require me to give bank details for some reason) and also i figured that my account is probably not going to be used anyways i can get away with not doing that.
+//TODO: make a S3 bucket in AWS server and connect the aws to the server, to do that, you will have to generate some information from the s3 bucket that you create, i have provided the structure of the code for it, so you just have to put in the values.
+//      the tutorial to this will be in this link <https://youtu.be/pGFy_uGtpCA?list=PLqm86YkewF6QbR7QwqYWcAbl70Zhv0JUE&t=1864>. 
+
+const s3 = new aws.S3({
+	region: 'ap-south-1',
+	accessKeyId: process.env.AWS_ACCESS_KEY, 
+	secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY
+})
+
+const generateUploadURL = async () => {
+
+	const date = new Date();
+	const imageName = `${nanoid()}-${date.getTime()}.jpeg`;
+
+	return await s3.getSignedUrlPromise('putObject' , {
+		Bucket: '  ', //put your bucket name in this
+		Key: imageName,
+		Expires : 1000 , 
+		ContentType : "image/jpeg"
+	})
+}
+
+
 
     
     const formatDatatoSend = (user) => {
@@ -52,6 +82,18 @@ mongoose.connect(process.env.DB_LOCATION , {
         
         }
         
+
+//upload image url route
+
+server.geet('/get-upload-url', (req, res) => {
+	generateUploadURL().then(url=> res.status(200).json({ uploadURL : url}))
+	.catch (err => {
+		console.log(err.message);
+		return res.status(500).json({ error: err.message })
+	})
+})
+
+
 
  server.post("/signup", (req, res) => {
 
@@ -155,3 +197,8 @@ server.listen(PORT , () => {
 //TODO: for one, the server is not wroking, there is some issue with mongo servers, i coudn't understand how to resolve that issue. so i have written down the code as shown in the tutorial, but couldn't do the testing part.
     
 //PS: the code is a bit messy with the gaps and etc, sorry
+
+
+//NOTE: I have not connected the server to the AWS because i would have to make an account (which would require me to give bank details for some reason) and also i figured that my account is probably not going to be used anyways i can get away with not doing that.
+//TODO: make a S3 bucket in AWS server and connect the aws to the server, to do that, you will have to generate some information from the s3 bucket that you create, i have provided the structure of the code for it, so you just have to put in the values.
+//      the tutorial to this will be in this link <https://youtu.be/pGFy_uGtpCA?list=PLqm86YkewF6QbR7QwqYWcAbl70Zhv0JUE&t=1864>. 
