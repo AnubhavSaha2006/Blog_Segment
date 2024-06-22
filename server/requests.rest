@@ -1,8 +1,9 @@
-POST http://localhost:3000/signup
+
+POST https://localhost:3000/create-blog
 Content-Type: application/json
+Authorization = Bearer dalkhjkldjjkadhkji
 
 {
-    # "email": "kunaa@gmail.com",
-    # "password": "Kunaal",
-        "fullame" : "someone someone"
+    "title" : "test title" 
 }
+
