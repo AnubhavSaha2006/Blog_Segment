@@ -79,7 +79,7 @@ const BlogEditor = () => {
 	
         let input = e.target;
         
-        input.stype.height = 'auto';
+        input.style.height = 'auto';
         input.style.height = input.scrollHeight + "px";
 
         setBlog( { ...blog, title: input.value } )
@@ -91,7 +91,7 @@ const BlogEditor = () => {
         img.src = defaultBanner;
     }
 
-    const habdlePublishEvent = () => {
+    const handlePublishEvent = () => {
 	
         if (!banner.length) {
             return toast.error("Upload a blog banner to publish it")
@@ -197,7 +197,7 @@ const BlogEditor = () => {
             New Blog
         </p>
     
-        <div calssName="flex gap-4 ml-auto">
+        <div className="flex gap-4 ml-auto">
             <button className="btn-dark py-2"
             onClick={handlePublishEvent}
             >

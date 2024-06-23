@@ -5,7 +5,7 @@ import axios from "axios";
 import Loader from "../components/loader.component";
 import BlogPostCard from "../components/blog-post.component";
 import MinimalBlogPost from "../components/nobanner-blog-post.component";
-import { acitveTabRef } from "../components/inpage-navigation.component";
+import { activeTabRef } from "../components/inpage-navigation.component";
 import NoDataMessage from "../components/nodata.component";
 
 
@@ -50,14 +50,14 @@ const HomePage = () => {
             })
     }
 
-    const loadBlogBycategory = (e) => {
+    const loadBlogByCategory = (e) => {
 
 
         let category = e.target.innerText.toLowerCase();
 
         setBlog(null);
 
-        if (pageState == category) {
+        if (pageState === category) {
             setPageState("home");
             return;
 
@@ -70,13 +70,13 @@ const HomePage = () => {
 
     useEffect(() => {
 
-        acitveTabRef.current.click();
+        activeTabRef.current.click();
 
-        if (pageState == "home") {
+        if (pageState === "home") {
 
             fetchLatestBlogs();
         } else {
-            fetchBlogsByCategory;
+            fetchBlogsByCategory();
         }
 
 
@@ -89,7 +89,7 @@ const HomePage = () => {
     }, [pageState])
 
     return (
-        <Animationwrapper>
+        <AnimationWrapper>
             <section className="h-cover flex justify-center gap-10">
                 { /* latest blogs */}
                 <div className="w-full">
@@ -99,7 +99,7 @@ const HomePage = () => {
 
                         <>
                             {
-                                blogs = null ? (<Loader />) : (
+                                blogs == null ? (<Loader />) : (
                                   blogs.length ? 
                                     blogs.map((blog, i) => {
                                     return (<AnimationWrapper transition={{ duration: 1, delay: i * .1 }} keyValue={i}>
@@ -116,7 +116,7 @@ const HomePage = () => {
                         </>
 
                         {
-                            trendingBlogs = null ? (<Loader />) : (
+                            trendingBlogs == null ? (<Loader />) : (
                               trendingBlogs.length ? 
                                 trendingBlogs.map((blog, i) => {
                                 return (<AnimationWrapper transition={{ duration: 1, delay: i * .1 }} keyValue={i}>
@@ -146,7 +146,7 @@ const HomePage = () => {
                             <div className="flex gap-3 flex-wrap">
                                 {
                                     categories.map((category, i) => {
-                                        return <button onClick={loadBlogBycategory} className={"tag" + (pageState == category ? "bg-black text-white" : "")} key={i}>
+                                        return <button onClick={loadBlogByCategory} className={"tag" + (pageState == category ? "bg-black text-white" : "")} key={i}>
                                             {category}
                                         </button>
                                     })
@@ -165,7 +165,7 @@ const HomePage = () => {
                             <h1 className="font-medium text-xl mb-8">Trending <i className="fi fi-rr-arrow-trend-up"></i></h1>
 
                             {
-                                trendingBlogs = null ? (<Loader /> )
+                                trendingBlogs == null ? (<Loader /> )
                                 : (
                                     trendingBlogs.length ?
                                     trendingBlogs.map((blog, i) => {
@@ -182,7 +182,7 @@ const HomePage = () => {
                 </div>
 
             </section>
-        </Animationwrapper>
+        </AnimationWrapper>
 
 
     )

@@ -11,7 +11,7 @@ const Tag = ({tag , tagIndex }) =>{
     }
 
     const handleTagEdit = (e) => {
-        if(e.keyCode = 13 || e.keyCode = 188){
+        if(e.keyCode = 13 || e.keyCode == 188){
 
             e.preventDefault();
             let currentTag = e.target.ineerText;

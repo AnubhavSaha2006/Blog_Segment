@@ -11,6 +11,7 @@ import { uploadImage } from "../common/aws";
 
 
 
+
 const uploadImageByFile = (e) => {
 	
 	return uploadImage(e).then(url=> {
@@ -45,7 +46,7 @@ const uploadImageByURL = (e) => {
 }
 
 
-export const tools = {
+const tools = {
 	embed: Embed, 
 	list: {
         class: List,
@@ -76,3 +77,4 @@ export const tools = {
 	inlinecode: InlineCode
 }
 
+export default tools;
