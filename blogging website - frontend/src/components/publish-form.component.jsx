@@ -4,6 +4,10 @@ import { useContext } from "react";
 import { EditorContext } from "../pages/editor.pages";
 import Tag from "./tags.component";
 import axios from "axios"
+import { UserContext } from "../App";
+
+
+
 
 
 const PublishForm = () => {
@@ -36,13 +40,13 @@ const PublishForm = () => {
 	}
 
 	const handleTitleKeyDown = (e) => {
-		if (e.keyCode = 13) {
+		if (e.keyCode === 13) {
 			e.preventDefault();
 		}
 	}
 
 	const handleKeyDown = () => {
-		if (e.keyCode = 13 || e.keyCode == 188) {
+		if (e.keyCode === 13 || e.keyCode == 188) {
 			e.preventDefault();
 
 			let tag = e.target.value;
