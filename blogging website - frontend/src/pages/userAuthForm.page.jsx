@@ -1,13 +1,15 @@
 import AnimationWrapper from "../common/page-animation";
 import InputBox from "../components/input.component";
 import googleIcon from "../imgs/google.png";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { useContext, useRef } from "react";
 import {Toaster , toast} from "react-hot-toast";
 import axios from "axios";
 import { storeInSession } from "../common/session";
-import { UserContext, Usercontext } from "../App";
-import { authWithGoogle } from "../common/firebase";
+import { UserContext } from "../App";
+import { authWithGoogle } from "../common/firebase"; 
+//we are not using this import yet becuase we haven't connected the server to google servers.
+
 
 
 
@@ -19,7 +21,7 @@ const UserAuthForm = ( { type }) => {
 
     const userAuthThroughServer = (serverRoute, formData) => {
 
-        axios.path(import.meta.env.VITE_SERVER_DOMAIN +	serverRoute,  formData)
+        axios.patch(import.meta.env.VITE_SERVER_DOMAIN +	serverRoute,  formData)
 
         .then(({ data }) => {
             
@@ -34,9 +36,7 @@ const UserAuthForm = ( { type }) => {
         })
 
     }
-    
 
-    // const authForm = useRef();
 
 
     const handleSubmit = (e) => {
@@ -103,7 +103,7 @@ const UserAuthForm = ( { type }) => {
                 
                 
                     {
-                    type != "sign-in" ?
+                    type !== "sign-in" ?
                     <InputBox 
                         name="fullname"
                         type="text"

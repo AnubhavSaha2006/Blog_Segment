@@ -2,7 +2,7 @@
 import axios from "axios";
 
 
-export const uploadtimage = async (img) => {
+export const uploadImage = async (img) => {
 
 	let imgUrl = null;
 

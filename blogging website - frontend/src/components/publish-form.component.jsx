@@ -42,7 +42,7 @@ const PublishForm = () => {
 	}
 
 	const handleKeyDown = () => {
-		if (e.keyCode = 13 || e.keyCode = 188) {
+		if (e.keyCode = 13 || e.keyCode == 188) {
 			e.preventDefault();
 
 			let tag = e.target.value;
