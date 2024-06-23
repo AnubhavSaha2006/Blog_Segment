@@ -20,7 +20,7 @@ const Navbar = () => {
 
     const handleBlur = () => {
         setTimeout(() => {
-            setUsereNavPanel (false);
+            setUserNavPanel (false);
         }, 200);
     }
 
@@ -121,4 +121,3 @@ export default Navbar;
 //TODO: the hide function is not working. According to me it should be working. How do I fix this?
 
 
-//BIG BIG ISSUE: when I try to open this page on browser using the link, it no longer has anything. it just shows a blank white page. I am sure it's a small error somewhere, but I can't seem to figure out where. I am hoping that someone else more fluent in web dev is able to see the problem. Very sorry about making your job longer !!
